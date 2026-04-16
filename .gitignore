@@ -1,0 +1,42 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+.Python
+*.egg-info/
+dist/
+build/
+.eggs/
+*.whl
+
+# Virtual environments
+.venv/
+venv/
+env/
+ENV/
+
+# Reports (generated — don't commit HTML reports, do commit alerts.log structure)
+reports/*.html
+reports/validation.log
+reports/alerts.log
+
+# Great Expectations generated state
+gx/
+.great_expectations/
+uncommitted/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+.DS_Store
+
+# Environment secrets — NEVER commit
+.env
+.env.local
+*.pem
+*.key
+
+# Docker
+.dockerignore

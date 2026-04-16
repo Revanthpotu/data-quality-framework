@@ -1,0 +1,33 @@
+version: "3.9"
+
+services:
+  dq-validator:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: runtime
+    container_name: dq-framework
+    volumes:
+      # Mount reports dir so HTML output is accessible on the host
+      - ./reports:/app/reports
+    environment:
+      # Alerting — set these in a .env file (never commit secrets)
+      - DQ_SLACK_WEBHOOK_URL=${DQ_SLACK_WEBHOOK_URL:-}
+      - DQ_PAGERDUTY_KEY=${DQ_PAGERDUTY_KEY:-}
+      - DQ_ALERT_EMAIL=${DQ_ALERT_EMAIL:-}
+    # Override to run a single suite:
+    #   docker compose run dq-validator python pipeline/run_validations.py --suite suite_01_nulls
+    command: python pipeline/run_validations.py
+
+  # Optional: serve the HTML report locally at http://localhost:8080
+  report-server:
+    image: nginx:alpine
+    container_name: dq-report-server
+    ports:
+      - "8080:80"
+    volumes:
+      - ./reports:/usr/share/nginx/html:ro
+    profiles:
+      - serve
+    depends_on:
+      - dq-validator

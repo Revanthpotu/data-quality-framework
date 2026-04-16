@@ -1,0 +1,51 @@
+transaction_id,customer_id,product_id,product_category,transaction_date,amount,quantity,payment_method,status,region,sales_rep_id
+TXN-10001,CUST-001,PROD-A01,Electronics,2024-01-03,299.99,1,credit_card,completed,North,REP-01
+TXN-10002,CUST-002,PROD-B12,Clothing,2024-01-04,45.50,2,paypal,completed,South,REP-02
+TXN-10003,CUST-003,PROD-C07,Home & Garden,2024-01-04,120.00,1,debit_card,completed,East,REP-03
+TXN-10004,CUST-001,PROD-A03,Electronics,2024-01-05,89.99,1,credit_card,completed,North,REP-01
+TXN-10005,CUST-004,PROD-D22,Books,2024-01-06,14.99,3,credit_card,completed,West,REP-04
+TXN-10006,CUST-005,PROD-B08,Clothing,2024-01-07,75.00,1,paypal,refunded,South,REP-02
+TXN-10007,CUST-006,PROD-A05,Electronics,2024-01-08,549.00,1,credit_card,completed,North,REP-01
+TXN-10008,CUST-007,PROD-C12,Home & Garden,2024-01-09,33.25,4,debit_card,completed,East,REP-03
+TXN-10009,CUST-008,PROD-D01,Books,2024-01-10,22.50,2,credit_card,completed,West,REP-04
+TXN-10010,CUST-002,PROD-A10,Electronics,2024-01-11,199.99,1,paypal,completed,South,REP-02
+TXN-10011,CUST-009,PROD-B15,Clothing,2024-01-12,60.00,1,credit_card,completed,North,REP-05
+TXN-10012,CUST-010,PROD-C03,Home & Garden,2024-01-13,88.75,2,debit_card,pending,East,REP-03
+TXN-10013,CUST-011,PROD-A07,Electronics,2024-01-14,349.00,1,credit_card,completed,West,REP-06
+TXN-10014,CUST-012,PROD-D10,Books,2024-01-15,9.99,5,paypal,completed,South,REP-02
+TXN-10015,CUST-013,PROD-B20,Clothing,2024-01-16,110.00,2,credit_card,completed,North,REP-05
+TXN-10016,CUST-003,PROD-C15,Home & Garden,2024-01-17,45.00,3,debit_card,completed,East,REP-03
+TXN-10017,CUST-014,PROD-A12,Electronics,2024-01-18,799.99,1,credit_card,completed,West,REP-06
+TXN-10018,CUST-015,PROD-B05,Clothing,2024-01-19,55.50,1,paypal,refunded,South,REP-02
+TXN-10019,CUST-016,PROD-D15,Books,2024-01-20,18.00,2,credit_card,completed,North,REP-05
+TXN-10020,CUST-017,PROD-C09,Home & Garden,2024-01-21,200.00,1,debit_card,completed,East,REP-03
+TXN-10021,CUST-018,PROD-A15,Electronics,2024-01-22,129.99,1,credit_card,completed,West,REP-06
+TXN-10022,CUST-019,PROD-B18,Clothing,2024-01-23,85.00,1,paypal,completed,South,REP-07
+TXN-10023,CUST-020,PROD-D08,Books,2024-01-24,29.99,1,credit_card,completed,North,REP-05
+TXN-10024,CUST-004,PROD-C20,Home & Garden,2024-01-25,67.50,2,debit_card,completed,East,REP-03
+TXN-10025,CUST-021,PROD-A02,Electronics,2024-01-26,459.00,1,credit_card,completed,West,REP-06
+TXN-10026,CUST-022,PROD-B10,Clothing,2024-01-27,40.00,3,paypal,completed,South,REP-07
+TXN-10027,CUST-023,PROD-D20,Books,2024-01-28,12.99,4,credit_card,completed,North,REP-05
+TXN-10028,CUST-024,PROD-C01,Home & Garden,2024-01-29,155.00,1,debit_card,pending,East,REP-03
+TXN-10029,CUST-025,PROD-A08,Electronics,2024-01-30,239.99,1,credit_card,completed,West,REP-06
+TXN-10030,CUST-026,PROD-B22,Clothing,2024-01-31,95.00,2,paypal,completed,South,REP-07
+TXN-10031,CUST-005,PROD-A20,Electronics,2024-02-01,319.99,1,credit_card,completed,North,REP-01
+TXN-10032,CUST-027,PROD-D05,Books,2024-02-02,7.99,1,debit_card,completed,East,REP-03
+TXN-10033,CUST-028,PROD-C18,Home & Garden,2024-02-03,180.00,1,credit_card,completed,West,REP-06
+TXN-10034,CUST-029,PROD-B03,Clothing,2024-02-04,65.00,1,paypal,completed,South,REP-07
+TXN-10035,CUST-030,PROD-A18,Electronics,2024-02-05,699.00,1,credit_card,completed,North,REP-01
+TXN-10036,CUST-006,PROD-D12,Books,2024-02-06,24.99,2,debit_card,completed,East,REP-03
+TXN-10037,CUST-031,PROD-C05,Home & Garden,2024-02-07,92.50,3,credit_card,completed,West,REP-06
+TXN-10038,CUST-032,PROD-B25,Clothing,2024-02-08,130.00,1,paypal,refunded,South,REP-07
+TXN-10039,CUST-033,PROD-A22,Electronics,2024-02-09,149.99,1,credit_card,completed,North,REP-01
+TXN-10040,CUST-034,PROD-C22,Home & Garden,2024-02-10,310.00,1,debit_card,completed,East,REP-03
+TXN-10041,CUST-007,PROD-D18,Books,2024-02-11,19.99,3,credit_card,completed,West,REP-06
+TXN-10042,CUST-035,PROD-B07,Clothing,2024-02-12,50.00,2,paypal,completed,South,REP-07
+TXN-10043,CUST-036,PROD-A25,Electronics,2024-02-13,889.99,1,credit_card,completed,North,REP-01
+TXN-10044,CUST-037,PROD-C25,Home & Garden,2024-02-14,75.00,4,debit_card,completed,East,REP-03
+TXN-10045,CUST-038,PROD-D22,Books,2024-02-15,34.99,2,credit_card,completed,West,REP-06
+TXN-10046,CUST-039,PROD-B12,Clothing,2024-02-16,45.50,1,paypal,completed,South,REP-07
+TXN-10047,CUST-008,PROD-A11,Electronics,2024-02-17,259.99,1,credit_card,completed,North,REP-01
+TXN-10048,CUST-040,PROD-C08,Home & Garden,2024-02-18,140.00,2,debit_card,pending,East,REP-03
+TXN-10049,CUST-041,PROD-B19,Clothing,2024-02-19,70.00,1,credit_card,completed,West,REP-06
+TXN-10050,CUST-042,PROD-D25,Books,2024-02-20,11.99,6,paypal,completed,South,REP-07

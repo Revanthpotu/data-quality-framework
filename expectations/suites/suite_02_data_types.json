@@ -1,0 +1,83 @@
+{
+  "data_asset_type": null,
+  "expectation_suite_name": "suite_02_data_types",
+  "expectations": [
+    {
+      "expectation_type": "expect_column_values_to_match_regex",
+      "kwargs": {
+        "column": "transaction_id",
+        "regex": "^TXN-\\d{5}$"
+      },
+      "meta": { "notes": "Transaction IDs must follow pattern TXN-NNNNN (e.g. TXN-10001)." }
+    },
+    {
+      "expectation_type": "expect_column_values_to_match_regex",
+      "kwargs": {
+        "column": "customer_id",
+        "regex": "^CUST-\\d{3}$"
+      },
+      "meta": { "notes": "Customer IDs must follow pattern CUST-NNN." }
+    },
+    {
+      "expectation_type": "expect_column_values_to_match_regex",
+      "kwargs": {
+        "column": "product_id",
+        "regex": "^PROD-[A-Z]\\d{2}$"
+      },
+      "meta": { "notes": "Product IDs must follow pattern PROD-XNN." }
+    },
+    {
+      "expectation_type": "expect_column_values_to_match_regex",
+      "kwargs": {
+        "column": "transaction_date",
+        "regex": "^\\d{4}-\\d{2}-\\d{2}$"
+      },
+      "meta": { "notes": "Dates must be ISO 8601 format YYYY-MM-DD." }
+    },
+    {
+      "expectation_type": "expect_column_values_to_be_of_type",
+      "kwargs": {
+        "column": "amount",
+        "type_": "float"
+      },
+      "meta": { "notes": "Amount must be numeric (float) for arithmetic operations." }
+    },
+    {
+      "expectation_type": "expect_column_values_to_be_of_type",
+      "kwargs": {
+        "column": "quantity",
+        "type_": "int"
+      },
+      "meta": { "notes": "Quantity must be an integer — fractional items are invalid." }
+    },
+    {
+      "expectation_type": "expect_column_values_to_be_in_set",
+      "kwargs": {
+        "column": "payment_method",
+        "value_set": ["credit_card", "debit_card", "paypal", "bank_transfer", "cash"]
+      },
+      "meta": { "notes": "Payment method must be one of the approved enum values." }
+    },
+    {
+      "expectation_type": "expect_column_values_to_be_in_set",
+      "kwargs": {
+        "column": "status",
+        "value_set": ["completed", "pending", "refunded", "failed", "cancelled"]
+      },
+      "meta": { "notes": "Status must be a valid lifecycle state." }
+    },
+    {
+      "expectation_type": "expect_column_values_to_be_in_set",
+      "kwargs": {
+        "column": "region",
+        "value_set": ["North", "South", "East", "West", "Central"]
+      },
+      "meta": { "notes": "Region must map to a defined sales territory." }
+    }
+  ],
+  "ge_cloud_id": null,
+  "meta": {
+    "great_expectations_version": "0.18.0",
+    "suite_description": "Suite 02 — Data Types & Formats: Validates column types, regex patterns, and enum membership."
+  }
+}

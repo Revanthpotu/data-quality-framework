@@ -1,0 +1,51 @@
+{
+  "data_asset_type": null,
+  "expectation_suite_name": "suite_01_nulls",
+  "expectations": [
+    {
+      "expectation_type": "expect_column_values_to_not_be_null",
+      "kwargs": { "column": "transaction_id" },
+      "meta": { "notes": "Every row must have a transaction ID — primary key cannot be null." }
+    },
+    {
+      "expectation_type": "expect_column_values_to_not_be_null",
+      "kwargs": { "column": "customer_id" },
+      "meta": { "notes": "Customer linkage is required for every transaction." }
+    },
+    {
+      "expectation_type": "expect_column_values_to_not_be_null",
+      "kwargs": { "column": "transaction_date" },
+      "meta": { "notes": "Null dates break time-series analysis and reporting windows." }
+    },
+    {
+      "expectation_type": "expect_column_values_to_not_be_null",
+      "kwargs": { "column": "amount" },
+      "meta": { "notes": "Revenue figures cannot be absent — flag for finance review." }
+    },
+    {
+      "expectation_type": "expect_column_values_to_not_be_null",
+      "kwargs": { "column": "status" },
+      "meta": { "notes": "Order lifecycle status is required for fulfillment tracking." }
+    },
+    {
+      "expectation_type": "expect_column_values_to_not_be_null",
+      "kwargs": { "column": "product_id" },
+      "meta": { "notes": "Product reference required for inventory and category rollups." }
+    },
+    {
+      "expectation_type": "expect_column_values_to_not_be_null",
+      "kwargs": { "column": "payment_method" },
+      "meta": { "notes": "Payment method required for reconciliation." }
+    },
+    {
+      "expectation_type": "expect_column_proportion_of_unique_values_to_be_between",
+      "kwargs": { "column": "transaction_id", "min_value": 0.99, "max_value": 1.0 },
+      "meta": { "notes": "transaction_id should be almost entirely unique (>99%)." }
+    }
+  ],
+  "ge_cloud_id": null,
+  "meta": {
+    "great_expectations_version": "0.18.0",
+    "suite_description": "Suite 01 — Completeness & Nulls: Ensures critical columns have no missing values."
+  }
+}
