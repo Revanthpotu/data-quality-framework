@@ -117,13 +117,21 @@ def run_suite(
     suite: gx.core.ExpectationSuite,
 ) -> gx.core.ExpectationValidationResult:
     """Run a single expectation suite against the DataFrame."""
-    datasource = context.sources.add_or_update_pandas(name="transactions_source")
+    # In GX 0.18 the fluent API uses add_pandas (not add_or_update_pandas).
+    # Each suite gets its own uniquely-named datasource to avoid conflicts
+    # across suites in the same context session.
+    source_name = f"source_{suite.expectation_suite_name}"
+    datasource = context.sources.add_pandas(name=source_name)
     data_asset = datasource.add_dataframe_asset(name=suite.expectation_suite_name)
+    # In GX 0.18 the dataframe is passed to build_batch_request, not the asset constructor
     batch_request = data_asset.build_batch_request(dataframe=df)
+
+    # Register the suite with the context so get_validator can find it by name
+    context.add_or_update_expectation_suite(expectation_suite=suite)
 
     validator = context.get_validator(
         batch_request=batch_request,
-        expectation_suite=suite,
+        expectation_suite_name=suite.expectation_suite_name,
     )
 
     result = validator.validate()

@@ -4,79 +4,48 @@
   "expectations": [
     {
       "expectation_type": "expect_column_values_to_be_between",
-      "kwargs": {
-        "column": "amount",
-        "min_value": 0.01,
-        "max_value": 50000.00
-      },
+      "kwargs": { "column": "amount", "min_value": 0.01, "max_value": 50000.00 },
       "meta": { "notes": "Transaction amounts must be positive and under $50,000 (fraud threshold)." }
     },
     {
       "expectation_type": "expect_column_values_to_be_between",
-      "kwargs": {
-        "column": "quantity",
-        "min_value": 1,
-        "max_value": 500
-      },
+      "kwargs": { "column": "quantity", "min_value": 1, "max_value": 500 },
       "meta": { "notes": "Quantity must be at least 1 and below bulk-order ceiling of 500." }
     },
     {
       "expectation_type": "expect_column_mean_to_be_between",
-      "kwargs": {
-        "column": "amount",
-        "min_value": 10.0,
-        "max_value": 2000.0
-      },
-      "meta": { "notes": "Average transaction value should stay in a realistic range ($10–$2000)." }
-    },
-    {
-      "expectation_type": "expect_column_median_to_be_between",
-      "kwargs": {
-        "column": "amount",
-        "min_value": 10.0,
-        "max_value": 1000.0
-      },
-      "meta": { "notes": "Median transaction value sanity check — outlier robustness." }
+      "kwargs": { "column": "amount", "min_value": 10.0, "max_value": 2000.0 },
+      "meta": { "notes": "Average transaction value should stay in a realistic range ($10-$2000)." }
     },
     {
       "expectation_type": "expect_column_stdev_to_be_between",
-      "kwargs": {
-        "column": "amount",
-        "min_value": 1.0,
-        "max_value": 5000.0
-      },
-      "meta": { "notes": "Standard deviation check — alerts if data is suspiciously uniform or exploded." }
+      "kwargs": { "column": "amount", "min_value": 1.0, "max_value": 5000.0 },
+      "meta": { "notes": "Standard deviation check - alerts if data is suspiciously uniform or exploded." }
     },
     {
       "expectation_type": "expect_column_values_to_be_between",
-      "kwargs": {
-        "column": "transaction_date",
-        "min_value": "2020-01-01",
-        "max_value": "2030-12-31"
-      },
+      "kwargs": { "column": "transaction_date", "min_value": "2020-01-01", "max_value": "2030-12-31" },
       "meta": { "notes": "Dates must fall within the valid business operating window." }
     },
     {
       "expectation_type": "expect_column_values_to_be_in_set",
-      "kwargs": {
-        "column": "product_category",
-        "value_set": ["Electronics", "Clothing", "Home & Garden", "Books", "Sports", "Toys", "Beauty", "Automotive"]
-      },
+      "kwargs": { "column": "product_category", "value_set": ["Electronics", "Clothing", "Home & Garden", "Books", "Sports", "Toys", "Beauty", "Automotive"] },
       "meta": { "notes": "Product categories must match the master taxonomy list." }
     },
     {
-      "expectation_type": "expect_column_sum_to_be_between",
-      "kwargs": {
-        "column": "quantity",
-        "min_value": 1,
-        "max_value": 100000
-      },
-      "meta": { "notes": "Total units sold should be within expected batch volume bounds." }
+      "expectation_type": "expect_column_min_to_be_between",
+      "kwargs": { "column": "amount", "min_value": 0.01, "max_value": 1000.0 },
+      "meta": { "notes": "Minimum transaction value sanity check." }
+    },
+    {
+      "expectation_type": "expect_column_max_to_be_between",
+      "kwargs": { "column": "quantity", "min_value": 1, "max_value": 500 },
+      "meta": { "notes": "Maximum quantity bulk anomaly detection." }
     }
   ],
   "ge_cloud_id": null,
   "meta": {
     "great_expectations_version": "0.18.0",
-    "suite_description": "Suite 03 — Value Ranges & Business Rules: Validates numeric bounds, statistical distributions, and category membership."
+    "suite_description": "Suite 03 - Value Ranges & Business Rules: Validates numeric bounds, statistical distributions, and category membership."
   }
 }

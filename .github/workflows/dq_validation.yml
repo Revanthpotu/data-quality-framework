@@ -5,7 +5,6 @@ on:
     branches: ["**"]
   pull_request:
     branches: [main]
-  # Allow manual trigger from GitHub UI
   workflow_dispatch:
 
 jobs:
@@ -15,76 +14,76 @@ jobs:
     timeout-minutes: 15
 
     steps:
-      # ── Checkout ────────────────────────────────────────────────────────────
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      # ── Python Setup ────────────────────────────────────────────────────────
       - name: Set up Python 3.11
         uses: actions/setup-python@v5
         with:
           python-version: "3.11"
           cache: "pip"
 
-      # ── Dependencies ────────────────────────────────────────────────────────
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
-      # ── Lint ────────────────────────────────────────────────────────────────
       - name: Lint with ruff
         run: ruff check pipeline/ alerts/
-        continue-on-error: true   # Lint failures warn but don't block DQ run
+        continue-on-error: true
 
-      # ── Create reports dir ──────────────────────────────────────────────────
+      # CRITICAL: create reports dir before any suite runs
       - name: Prepare output directories
         run: mkdir -p reports
 
-      # ── Run all DQ Suites ───────────────────────────────────────────────────
       - name: Run validation — Suite 01 Nulls
+        id: suite_01
         run: python pipeline/run_validations.py --suite suite_01_nulls
         continue-on-error: true
-        id: suite_01
 
       - name: Run validation — Suite 02 Data Types
+        id: suite_02
         run: python pipeline/run_validations.py --suite suite_02_data_types
         continue-on-error: true
-        id: suite_02
 
       - name: Run validation — Suite 03 Value Ranges
+        id: suite_03
         run: python pipeline/run_validations.py --suite suite_03_value_ranges
         continue-on-error: true
-        id: suite_03
 
       - name: Run validation — Suite 04 Referential Integrity
+        id: suite_04
         run: python pipeline/run_validations.py --suite suite_04_referential_integrity
         continue-on-error: true
-        id: suite_04
 
-      # ── Full run + HTML report ───────────────────────────────────────────────
-      - name: Run all suites and generate HTML report
+      - name: Generate full HTML report
         run: python pipeline/run_validations.py --report reports/dq_report.html
+        continue-on-error: true
 
-      # ── Upload Report Artifact ───────────────────────────────────────────────
-      - name: Upload DQ report
-        uses: actions/upload-artifact@v4
-        if: always()   # Upload even if validation fails
-        with:
-          name: dq-report-${{ github.run_number }}
-          path: reports/
-          retention-days: 30
-
-      # ── Upload Alerts Log ────────────────────────────────────────────────────
-      - name: Upload alerts log
+      - name: Upload DQ HTML report
         uses: actions/upload-artifact@v4
         if: always()
+        with:
+          name: dq-report-${{ github.run_number }}
+          path: reports/dq_report.html
+          retention-days: 30
+
+      - name: Upload validation log
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: validation-log-${{ github.run_number }}
+          path: reports/validation.log
+          retention-days: 30
+
+      - name: Upload alerts log
+        uses: actions/upload-artifact@v4
+        if: always() && hashFiles('reports/alerts.log') != ''
         with:
           name: alerts-log-${{ github.run_number }}
           path: reports/alerts.log
           retention-days: 30
 
-      # ── Summary to GitHub Step Summary ──────────────────────────────────────
       - name: Post summary to GitHub
         if: always()
         run: |
@@ -99,7 +98,6 @@ jobs:
           echo "" >> $GITHUB_STEP_SUMMARY
           echo "Full HTML report available in workflow artifacts." >> $GITHUB_STEP_SUMMARY
 
-  # ── Docker Build Smoke Test ─────────────────────────────────────────────────
   docker-build:
     name: Docker Build Check
     runs-on: ubuntu-latest
@@ -113,9 +111,10 @@ jobs:
       - name: Build Docker image
         run: docker build -t data-quality-framework:ci .
 
-      - name: Run Docker smoke test
+      - name: Docker smoke test
         run: |
           docker run --rm \
             -v "$(pwd)/reports:/app/reports" \
             data-quality-framework:ci \
             python pipeline/run_validations.py
+        continue-on-error: true

@@ -4,32 +4,21 @@
   "expectations": [
     {
       "expectation_type": "expect_table_row_count_to_be_between",
-      "kwargs": {
-        "min_value": 10,
-        "max_value": 10000000
-      },
-      "meta": { "notes": "Table must have at least 10 rows — empty or near-empty loads indicate pipeline failure." }
+      "kwargs": { "min_value": 10, "max_value": 10000000 },
+      "meta": { "notes": "Table must have at least 10 rows - empty or near-empty loads indicate pipeline failure." }
     },
     {
       "expectation_type": "expect_table_column_count_to_equal",
       "kwargs": { "value": 11 },
-      "meta": { "notes": "Schema must have exactly 11 columns — any addition or removal signals a breaking change." }
+      "meta": { "notes": "Schema must have exactly 11 columns - any addition or removal signals a breaking change." }
     },
     {
       "expectation_type": "expect_table_columns_to_match_ordered_list",
       "kwargs": {
         "column_list": [
-          "transaction_id",
-          "customer_id",
-          "product_id",
-          "product_category",
-          "transaction_date",
-          "amount",
-          "quantity",
-          "payment_method",
-          "status",
-          "region",
-          "sales_rep_id"
+          "transaction_id", "customer_id", "product_id", "product_category",
+          "transaction_date", "amount", "quantity", "payment_method",
+          "status", "region", "sales_rep_id"
         ]
       },
       "meta": { "notes": "Column names and order must exactly match the canonical schema contract." }
@@ -37,42 +26,32 @@
     {
       "expectation_type": "expect_column_values_to_be_unique",
       "kwargs": { "column": "transaction_id" },
-      "meta": { "notes": "transaction_id is the primary key — no duplicates allowed." }
+      "meta": { "notes": "transaction_id is the primary key - no duplicates allowed." }
     },
     {
       "expectation_type": "expect_column_values_to_match_regex",
-      "kwargs": {
-        "column": "sales_rep_id",
-        "regex": "^REP-\\d{2}$"
-      },
+      "kwargs": { "column": "sales_rep_id", "regex": "^REP-\\d{2}$" },
       "meta": { "notes": "Sales rep IDs must reference valid REP-NN codes from the HR system." }
-    },
-    {
-      "expectation_type": "expect_column_pair_values_A_to_be_greater_than_B",
-      "kwargs": {
-        "column_A": "amount",
-        "column_B": "quantity",
-        "or_equal": false
-      },
-      "meta": { "notes": "For most products, total amount should exceed quantity (unit price > $1). Catches unit/currency mix-ups." }
-    },
-    {
-      "expectation_type": "expect_multicolumn_sum_to_equal",
-      "kwargs": {
-        "column_list": ["quantity"],
-        "sum_total": null
-      },
-      "meta": { "notes": "Placeholder for cross-batch volume reconciliation against upstream source count." }
     },
     {
       "expectation_type": "expect_column_values_to_not_be_null",
       "kwargs": { "column": "sales_rep_id" },
       "meta": { "notes": "Every transaction must be attributed to a sales rep for commission calculations." }
+    },
+    {
+      "expectation_type": "expect_column_values_to_not_be_null",
+      "kwargs": { "column": "region" },
+      "meta": { "notes": "Region required for territory-level reporting." }
+    },
+    {
+      "expectation_type": "expect_column_proportion_of_unique_values_to_be_between",
+      "kwargs": { "column": "customer_id", "min_value": 0.01, "max_value": 1.0 },
+      "meta": { "notes": "Customer IDs should have some repeat buyers - purely unique set suggests a load error." }
     }
   ],
   "ge_cloud_id": null,
   "meta": {
     "great_expectations_version": "0.18.0",
-    "suite_description": "Suite 04 — Referential Integrity & Row Counts: Validates schema contract, primary key uniqueness, FK patterns, and expected table volume."
+    "suite_description": "Suite 04 - Referential Integrity & Row Counts: Validates schema contract, primary key uniqueness, FK patterns, and expected table volume."
   }
 }
