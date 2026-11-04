@@ -182,6 +182,18 @@ The structural layer — validates the shape of the dataset and ensures foreign-
 
 ---
 
+## Quick Start
+
+```bash
+pip install -r requirements.txt
+python -m pytest tests/
+PYTHONPATH=. python pipeline/run_validations.py
+```
+
+`pytest` runs the 17 unit tests. The validation run prints a summary table — all four suites pass against the sample data (33 expectations in total) — and writes an HTML report to `reports/dq_report.html`. `PYTHONPATH=.` is needed because `pipeline/run_validations.py` imports the `alerts` package from the repository root.
+
+---
+
 ## License
 
 MIT License — see [LICENSE](LICENSE) for details.
