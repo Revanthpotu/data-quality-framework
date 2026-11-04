@@ -1,8 +1,8 @@
 # 📊 Data Quality Framework
 
-> A production-grade data quality validation system built with **Great Expectations**, featuring automated expectation suites, HTML reporting, alerting stubs, Docker packaging, and GitHub Actions CI.
+> A data-quality validation framework built with Great Expectations: four expectation suites, HTML reports, alerting stubs for Slack, PagerDuty and email, Docker packaging and GitHub Actions CI.
 
-[![Data Quality CI](https://github.com/YOUR_USERNAME/data-quality-framework/actions/workflows/dq_validation.yml/badge.svg)](https://github.com/Revanthpotu/data-quality-framework/actions/workflows/dq_validation.yml)
+[![Data Quality CI](https://github.com/Revanthpotu/data-quality-framework/actions/workflows/dq_validation.yml/badge.svg)](https://github.com/Revanthpotu/data-quality-framework/actions/workflows/dq_validation.yml)
 [![Python 3.11](https://img.shields.io/badge/python-3.11-blue.svg)](https://www.python.org/downloads/)
 [![Great Expectations](https://img.shields.io/badge/great--expectations-0.18-orange.svg)](https://greatexpectations.io/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
@@ -16,12 +16,6 @@
 - [Project Structure](#project-structure)
 - [Dataset](#dataset)
 - [Expectation Suites](#expectation-suites)
-- [Quick Start](#quick-start)
-- [Running with Docker](#running-with-docker)
-- [GitHub Actions CI](#github-actions-ci)
-- [Alerting](#alerting)
-- [Extending the Framework](#extending-the-framework)
-- [Push to GitHub](#push-to-github)
 
 ---
 
@@ -115,6 +109,8 @@ The seed dataset (`data/transactions.csv`) simulates a real-world e-commerce tra
 | `sales_rep_id` | string | Attributed rep, format `REP-NN` |
 
 The customer master (`data/customers.csv`) provides referential targets for `customer_id` foreign-key validation.
+
+The seed data is 50 sample transactions so suites run in seconds. The suites are written against column rules, not row counts, except the minimum-row check in Suite 04.
 
 ---
 
